@@ -1,0 +1,363 @@
+/**
+ * PlixusPreviewStage - Swiss Design Inspired CSS
+ * Minimalistic, functional, and customizable via CSS variables
+ */
+
+:root {
+  /* Colors - Swiss Design Palette */
+  --plixus-preview-primary: #000000;
+  --plixus-preview-secondary: #6b7280;
+  --plixus-preview-accent: #2563eb;
+  --plixus-preview-background: #ffffff;
+  --plixus-preview-surface: #f8fafc;
+  --plixus-preview-border: #e5e7eb;
+  --plixus-preview-border-focus: #2563eb;
+  
+  /* Typography */
+  --plixus-preview-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --plixus-preview-font-size-base: 14px;
+  --plixus-preview-font-size-small: 12px;
+  --plixus-preview-font-size-large: 16px;
+  --plixus-preview-font-weight-normal: 400;
+  --plixus-preview-font-weight-medium: 500;
+  --plixus-preview-font-weight-bold: 600;
+  --plixus-preview-line-height: 1.5;
+  
+  /* Spacing */
+  --plixus-preview-spacing-xs: 4px;
+  --plixus-preview-spacing-sm: 8px;
+  --plixus-preview-spacing-md: 16px;
+  --plixus-preview-spacing-lg: 24px;
+  --plixus-preview-spacing-xl: 32px;
+  
+  /* Layout */
+  --plixus-preview-border-radius: 6px;
+  --plixus-preview-border-width: 1px;
+  --plixus-preview-form-width: 300px;
+  --plixus-preview-gap: var(--plixus-preview-spacing-lg);
+}
+
+/* Main Container */
+.plixus-preview-stage {
+  font-family: var(--plixus-preview-font-family);
+  font-size: var(--plixus-preview-font-size-base);
+  line-height: var(--plixus-preview-line-height);
+  color: var(--plixus-preview-primary);
+  background: var(--plixus-preview-background);
+}
+
+.plixus-preview-stage__container {
+  display: grid;
+  gap: var(--plixus-preview-gap);
+  min-height: 400px;
+}
+
+/* Layout Variants */
+.plixus-preview-stage--horizontal .plixus-preview-stage__container {
+  grid-template-columns: var(--plixus-preview-form-width) 1fr;
+}
+
+.plixus-preview-stage--vertical .plixus-preview-stage__container {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+/* Form Section */
+.plixus-preview-stage__form {
+  background: var(--plixus-preview-surface);
+  border: var(--plixus-preview-border-width) solid var(--plixus-preview-border);
+  border-radius: var(--plixus-preview-border-radius);
+  padding: var(--plixus-preview-spacing-lg);
+}
+
+.plixus-preview-stage__form h3 {
+  margin: 0 0 var(--plixus-preview-spacing-md) 0;
+  font-size: var(--plixus-preview-font-size-base);
+  font-weight: var(--plixus-preview-font-weight-medium);
+  color: var(--plixus-preview-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+/* Form Elements */
+.plixus-preview-stage .form-group {
+  margin-bottom: var(--plixus-preview-spacing-md);
+}
+
+.plixus-preview-stage .form-group:last-child {
+  margin-bottom: 0;
+}
+
+.plixus-preview-stage label {
+  display: block;
+  margin-bottom: var(--plixus-preview-spacing-xs);
+  font-size: var(--plixus-preview-font-size-small);
+  font-weight: var(--plixus-preview-font-weight-medium);
+  color: var(--plixus-preview-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.plixus-preview-stage input[type="text"],
+.plixus-preview-stage input[type="email"],
+.plixus-preview-stage input[type="url"],
+.plixus-preview-stage input[type="number"],
+.plixus-preview-stage select,
+.plixus-preview-stage textarea {
+  width: 100%;
+  padding: var(--plixus-preview-spacing-sm) var(--plixus-preview-spacing-sm);
+  border: var(--plixus-preview-border-width) solid var(--plixus-preview-border);
+  border-radius: var(--plixus-preview-border-radius);
+  font-family: inherit;
+  font-size: var(--plixus-preview-font-size-base);
+  line-height: var(--plixus-preview-line-height);
+  background: var(--plixus-preview-background);
+  color: var(--plixus-preview-primary);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.plixus-preview-stage input:focus,
+.plixus-preview-stage select:focus,
+.plixus-preview-stage textarea:focus {
+  outline: none;
+  border-color: var(--plixus-preview-border-focus);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.plixus-preview-stage textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Checkbox Styling */
+.plixus-preview-stage input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-right: var(--plixus-preview-spacing-sm);
+  accent-color: var(--plixus-preview-accent);
+}
+
+.plixus-preview-stage .form-group:has(input[type="checkbox"]) label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+/* Help Text */
+.plixus-preview-stage .form-help {
+  margin-top: var(--plixus-preview-spacing-xs);
+  font-size: var(--plixus-preview-font-size-small);
+  color: var(--plixus-preview-secondary);
+  line-height: 1.4;
+}
+
+/* Error Messages */
+.plixus-preview-stage .form-error {
+  margin-top: var(--plixus-preview-spacing-xs);
+  font-size: var(--plixus-preview-font-size-small);
+  color: #dc2626;
+}
+
+/* Preview Section */
+.plixus-preview-stage__preview {
+  background: var(--plixus-preview-background);
+  border: var(--plixus-preview-border-width) solid var(--plixus-preview-border);
+  border-radius: var(--plixus-preview-border-radius);
+  padding: var(--plixus-preview-spacing-lg);
+}
+
+.plixus-preview-stage__preview h3 {
+  margin: 0 0 var(--plixus-preview-spacing-md) 0;
+  font-size: var(--plixus-preview-font-size-base);
+  font-weight: var(--plixus-preview-font-weight-medium);
+  color: var(--plixus-preview-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+/* Component Container */
+.plixus-preview-stage__component {
+  margin-bottom: var(--plixus-preview-spacing-lg);
+  padding: var(--plixus-preview-spacing-md);
+  border: 2px dashed var(--plixus-preview-border);
+  border-radius: var(--plixus-preview-border-radius);
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(0, 0, 0, 0.01) 10px,
+    rgba(0, 0, 0, 0.01) 20px
+  );
+}
+
+/* Documentation Section */
+.plixus-component-documentation {
+  margin-bottom: var(--plixus-preview-spacing-lg);
+  padding: var(--plixus-preview-spacing-md);
+  background: var(--plixus-preview-surface);
+  border-radius: var(--plixus-preview-border-radius);
+  border: var(--plixus-preview-border-width) solid var(--plixus-preview-border);
+}
+
+.plixus-component-documentation h4 {
+  margin: 0 0 var(--plixus-preview-spacing-sm) 0;
+  font-size: var(--plixus-preview-font-size-small);
+  font-weight: var(--plixus-preview-font-weight-medium);
+  color: var(--plixus-preview-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.plixus-component-documentation p {
+  margin: 0 0 var(--plixus-preview-spacing-xs) 0;
+  font-size: var(--plixus-preview-font-size-small);
+  color: var(--plixus-preview-secondary);
+  line-height: 1.4;
+}
+
+.plixus-component-documentation .properties-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--plixus-preview-spacing-sm);
+}
+
+.plixus-component-documentation .properties-table th,
+.plixus-component-documentation .properties-table td {
+  padding: var(--plixus-preview-spacing-xs) var(--plixus-preview-spacing-sm);
+  text-align: left;
+  border-bottom: var(--plixus-preview-border-width) solid var(--plixus-preview-border);
+  font-size: var(--plixus-preview-font-size-small);
+}
+
+.plixus-component-documentation .properties-table th {
+  font-weight: var(--plixus-preview-font-weight-medium);
+  color: var(--plixus-preview-secondary);
+  background: var(--plixus-preview-background);
+}
+
+/* Code Section */
+.plixus-preview-stage__code {
+  background: var(--plixus-preview-surface);
+  border: var(--plixus-preview-border-width) solid var(--plixus-preview-border);
+  border-radius: var(--plixus-preview-border-radius);
+  padding: var(--plixus-preview-spacing-md);
+}
+
+.plixus-preview-stage__code h4 {
+  margin: 0 0 var(--plixus-preview-spacing-sm) 0;
+  font-size: var(--plixus-preview-font-size-small);
+  font-weight: var(--plixus-preview-font-weight-medium);
+  color: var(--plixus-preview-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+/* Syntax Tab Functionality */
+.plixus-syntax-tabs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--plixus-preview-spacing-sm);
+}
+
+.plixus-tab-buttons {
+  display: flex;
+  gap: var(--plixus-preview-spacing-xs);
+}
+
+.plixus-tab {
+  background: var(--plixus-preview-background);
+  border: var(--plixus-preview-border-width) solid var(--plixus-preview-border);
+  border-radius: var(--plixus-preview-border-radius);
+  padding: var(--plixus-preview-spacing-xs) var(--plixus-preview-spacing-sm);
+  font-size: var(--plixus-preview-font-size-small);
+  font-weight: var(--plixus-preview-font-weight-medium);
+  color: var(--plixus-preview-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.plixus-tab:hover {
+  background: var(--plixus-preview-accent);
+  color: var(--plixus-preview-background);
+  border-color: var(--plixus-preview-accent);
+}
+
+.plixus-tab--active {
+  background: var(--plixus-preview-accent);
+  color: var(--plixus-preview-background);
+  border-color: var(--plixus-preview-accent);
+}
+
+.plixus-syntax-content {
+  display: none;
+}
+
+.plixus-syntax-content--active {
+  display: block;
+}
+
+.plixus-preview-stage__code pre {
+  margin: 0;
+  padding: var(--plixus-preview-spacing-sm);
+  background: var(--plixus-preview-background);
+  border: var(--plixus-preview-border-width) solid var(--plixus-preview-border);
+  border-radius: var(--plixus-preview-border-radius);
+  font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Consolas", monospace;
+  font-size: var(--plixus-preview-font-size-small);
+  line-height: 1.4;
+  overflow-x: auto;
+}
+
+.plixus-preview-stage__code code {
+  color: var(--plixus-preview-secondary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .plixus-preview-stage--horizontal .plixus-preview-stage__container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  
+  :root {
+    --plixus-preview-form-width: 100%;
+    --plixus-preview-spacing-lg: 16px;
+    --plixus-preview-spacing-md: 12px;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --plixus-preview-primary: #f8fafc;
+    --plixus-preview-secondary: #94a3b8;
+    --plixus-preview-accent: #3b82f6;
+    --plixus-preview-background: #1e293b;
+    --plixus-preview-surface: #334155;
+    --plixus-preview-border: #475569;
+    --plixus-preview-border-focus: #3b82f6;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .plixus-preview-stage *,
+  .plixus-preview-stage *::before,
+  .plixus-preview-stage *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+.plixus-preview-stage *:focus-visible {
+  outline: 2px solid var(--plixus-preview-accent);
+  outline-offset: 2px;
+}

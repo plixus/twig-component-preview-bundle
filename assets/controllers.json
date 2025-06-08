@@ -1,0 +1,9 @@
+{
+    "controllers": {
+        "preview-stage": {
+            "main": "controllers/preview_stage_controller.js",
+            "name": "preview-stage"
+        }
+    },
+    "entrypoints": []
+}

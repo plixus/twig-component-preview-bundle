@@ -1,0 +1,21 @@
+# Dependencies
+/vendor/
+composer.lock
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+/tests/coverage/
+.phpunit.result.cache
+
+# Temporary files
+*.tmp
+*.log

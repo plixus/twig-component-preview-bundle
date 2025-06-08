@@ -1,0 +1,25 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    # Services
+    Plixus\TwigComponentPreviewBundle\Service\:
+        resource: '../src/Service/'
+        public: true
+
+    # Twig Components
+    Plixus\TwigComponentPreviewBundle\TwigComponent\:
+        resource: '../src/TwigComponent/'
+        tags: ['twig.component']
+
+    # Explicit service definitions for better IDE support
+    Plixus\TwigComponentPreviewBundle\Service\ComponentPreviewAnalyzer:
+        public: true
+
+    Plixus\TwigComponentPreviewBundle\Service\PreviewFormBuilder:
+        public: true
+
+    Plixus\TwigComponentPreviewBundle\Service\ComponentInstanceFactory:
+        public: true

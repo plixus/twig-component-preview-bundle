@@ -1,0 +1,68 @@
+{% set metadata = this.metadata %}
+{% set properties = this.properties %}
+
+<div class="plixus-component-documentation">
+    {% if showMetadata and metadata %}
+        <div class="plixus-component-documentation__metadata">
+            <h3>{{ metadata.name ?? 'Component' }}</h3>
+            {% if metadata.description %}
+                <p class="description">{{ metadata.description }}</p>
+            {% endif %}
+            {% if metadata.category %}
+                <span class="category badge">{{ metadata.category }}</span>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% if showProperties and properties|length > 0 %}
+        <div class="plixus-component-documentation__properties">
+            <h4>Properties</h4>
+            <table class="properties-table">
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Required</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for name, property in properties %}
+                        <tr>
+                            <td><code>{{ name }}</code></td>
+                            <td><span class="type">{{ property.type }}</span></td>
+                            <td>
+                                {% if property.default is not null %}
+                                    <code>{{ property.default|json_encode }}</code>
+                                {% else %}
+                                    <em>null</em>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if property.required %}
+                                    <span class="required">✓</span>
+                                {% else %}
+                                    <span class="optional">-</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ property.help ?? '' }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+
+    {% if showExamples and metadata and metadata.examples|length > 0 %}
+        <div class="plixus-component-documentation__examples">
+            <h4>Examples</h4>
+            {% for example in metadata.examples %}
+                <div class="example">
+                    <h5>{{ example.name ?? 'Example' }}</h5>
+                    <pre><code>{{ example.code }}</code></pre>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

@@ -1,0 +1,77 @@
+<div 
+    class="plixus-preview-stage plixus-preview-stage--{{ layout }}{% if theme == 'dark' %} plixus-preview-stage--dark{% endif %}"
+    {{ attributes }}
+    {% if formWidth %}style="--plixus-preview-form-width: {{ formWidth }};"{% endif %}
+>
+    <div class="plixus-preview-stage__container">
+        <div class="plixus-preview-stage__form">
+            <h3>Component Properties</h3>
+            {{ form_start(form) }}
+            
+            {% for child in form.children %}
+                <div class="form-group">
+                    {{ form_label(child) }}
+                    {{ form_widget(child, {
+                        'attr': {
+                            'data-model': 'componentData[' ~ child.vars.name ~ ']'
+                        }
+                    }) }}
+                    {{ form_help(child) }}
+                    {{ form_errors(child) }}
+                </div>
+            {% endfor %}
+            
+            {{ form_end(form) }}
+        </div>
+        
+        <div class="plixus-preview-stage__preview">
+            <h3>Live Preview</h3>
+            
+            <div class="plixus-preview-stage__component">
+                {{ component(componentName, componentProps) }}
+            </div>
+            
+            {% if showDocumentation %}
+                {{ component('PlixusComponentDocumentation', {
+                    componentClass: componentClass,
+                    showExamples: showExamples
+                }) }}
+            {% endif %}
+            
+            {% if showCodeExample %}
+                <div class="plixus-preview-stage__code">
+                    {% if showBothSyntax %}
+                        <div class="plixus-syntax-tabs">
+                            <h4>Twig Code</h4>
+                            <div class="plixus-tab-buttons">
+                                <button class="plixus-tab plixus-tab--active" data-syntax="function">Function Syntax</button>
+                                <button class="plixus-tab" data-syntax="html">HTML Syntax</button>
+                            </div>
+                        </div>
+                        
+                        <div class="plixus-syntax-content plixus-syntax-content--active" data-syntax="function">
+                            <pre><code>{{ '{{' }} component('{{ componentName }}', {{ componentProps|json_encode|raw }}) {{ '}}' }}</code></pre>
+                        </div>
+                        
+                        <div class="plixus-syntax-content" data-syntax="html">
+                            <pre><code>&lt;twig:{{ componentName|title }}{% for key, value in componentProps %}{% if value is same as(true) %} :{{ key }}="true"{% elseif value is same as(false) %} :{{ key }}="false"{% elseif value is not empty %} {{ key }}="{{ value }}"{% endif %}{% endfor %} /&gt;</code></pre>
+                        </div>
+                    {% else %}
+                        <h4>Twig Code</h4>
+                        {% if codeSyntax == 'html' %}
+                            <pre><code>&lt;twig:{{ componentName|title }}{% for key, value in componentProps %}{% if value is same as(true) %} :{{ key }}="true"{% elseif value is same as(false) %} :{{ key }}="false"{% elseif value is not empty %} {{ key }}="{{ value }}"{% endif %}{% endfor %} /&gt;</code></pre>
+                        {% else %}
+                            <pre><code>{{ '{{' }} component('{{ componentName }}', {{ componentProps|json_encode|raw }}) {{ '}}' }}</code></pre>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            {% endif %}
+            
+            {% if customOptions.additionalContent is defined %}
+                <div class="plixus-preview-stage__custom">
+                    {{ customOptions.additionalContent|raw }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

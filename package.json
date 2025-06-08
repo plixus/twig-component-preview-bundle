@@ -1,0 +1,14 @@
+{
+  "name": "@plixus/twig-component-preview-bundle",
+  "version": "1.0.0",
+  "description": "Symfony Bundle for Twig Component Preview with Live Components",
+  "main": "assets/controllers.json",
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@hotwired/stimulus": "^3.0.0"
+  }
+}
