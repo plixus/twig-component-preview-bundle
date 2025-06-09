@@ -4,9 +4,14 @@ namespace Plixus\TwigComponentPreviewBundle\Service;
 
 use Plixus\TwigComponentPreviewBundle\Attribute\PreviewableComponent;
 use Plixus\TwigComponentPreviewBundle\Attribute\PreviewProperty;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ComponentPreviewAnalyzer
 {
+    public function __construct(
+        private TranslatorInterface $translator
+    ) {
+    }
     /**
      * Checks if class is marked as PreviewableComponent
      */
@@ -93,7 +98,7 @@ final class ComponentPreviewAnalyzer
                 $value = $property->getValue($component);
 
                 if (empty($value)) {
-                    $errors[$propertyName] = 'This field is required';
+                    $errors[$propertyName] = $this->translator->trans('errors.field_required', [], 'PlixusTwigComponentPreviewBundle');
                 }
             }
         }

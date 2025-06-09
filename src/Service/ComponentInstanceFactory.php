@@ -2,10 +2,13 @@
 
 namespace Plixus\TwigComponentPreviewBundle\Service;
 
+use Symfony\Contracts\Translation\TranslatorInterface;
+
 final class ComponentInstanceFactory
 {
     public function __construct(
-        private ComponentPreviewAnalyzer $analyzer
+        private ComponentPreviewAnalyzer $analyzer,
+        private TranslatorInterface $translator
     ) {
     }
 
@@ -15,7 +18,9 @@ final class ComponentInstanceFactory
     public function createWithDefaults(string $componentClassName): object
     {
         if (!class_exists($componentClassName)) {
-            throw new \InvalidArgumentException("Class {$componentClassName} does not exist");
+            throw new \InvalidArgumentException(
+                $this->translator->trans('errors.class_not_exist', ['%class%' => $componentClassName], 'PlixusTwigComponentPreviewBundle')
+            );
         }
 
         $instance = new $componentClassName();
@@ -36,7 +41,9 @@ final class ComponentInstanceFactory
     public function createFromFormData(string $componentClassName, array $formData): object
     {
         if (!class_exists($componentClassName)) {
-            throw new \InvalidArgumentException("Class {$componentClassName} does not exist");
+            throw new \InvalidArgumentException(
+                $this->translator->trans('errors.class_not_exist', ['%class%' => $componentClassName], 'PlixusTwigComponentPreviewBundle')
+            );
         }
 
         $instance = new $componentClassName();

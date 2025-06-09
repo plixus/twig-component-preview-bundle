@@ -1,0 +1,11 @@
+# English translations for PlixusTwigComponentPreviewBundle
+preview_stage:
+  component_properties: 'Component Properties'
+  live_preview: 'Live Preview'
+  twig_code: 'Twig Code'
+  function_syntax: 'Function Syntax'
+  html_syntax: 'HTML Syntax'
+
+errors:
+  class_not_exist: 'Class %class% does not exist'
+  field_required: 'This field is required'

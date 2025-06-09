@@ -23,7 +23,7 @@ Das Bundle ist funktional und architektural solide, benötigt aber kritische Ver
 - [x] **Deutsche Kommentare entfernen**
   - `src/Service/ComponentInstanceFactory.php` - Line comments "// Erstelle eine Instanz..."
   - `src/Service/ComponentPreviewAnalyzer.php` - Method comments "// Hole alle Properties..."
-- [ ] **Hardcoded Strings durch Translation Keys ersetzen**
+- [x] **Hardcoded Strings durch Translation Keys ersetzen**
   - Template-Strings in `templates/components/PlixusPreviewStage.html.twig`
   - Error-Messages in Service-Klassen
 - [ ] **PSR-5 Docblocks hinzufügen**
