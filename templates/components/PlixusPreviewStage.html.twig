@@ -1,21 +1,36 @@
-<div 
+<div
     class="plixus-preview-stage plixus-preview-stage--{{ layout }}{% if theme == 'dark' %} plixus-preview-stage--dark{% endif %}"
-    {{ attributes }}
+    {{ attributes.defaults({
+        'data-controller': 'plixus--twig-component-preview-bundle--preview-stage',
+        'data-plixus--twig-component-preview-bundle--preview-stage-form-target': 'form',
+        'data-plixus--twig-component-preview-bundle--preview-stage-auto-submit-value': 'true',
+        'data-plixus--twig-component-preview-bundle--preview-stage-debounce-delay-value': '300'
+    }) }}
     {% if formWidth %}style="--plixus-preview-form-width: {{ formWidth }};"{% endif %}
 >
     <div class="plixus-preview-stage__container">
         <div class="plixus-preview-stage__form">
             <h3>Component Properties</h3>
-            {{ form_start(form) }}
+            {{ form_start(form, {
+                'attr': {
+                    'data-plixus--twig-component-preview-bundle--preview-stage-target': 'form'
+                }
+            }) }}
             
             {% for child in form.children %}
                 <div class="form-group">
                     {{ form_label(child) }}
-                    {{ form_widget(child, {
-                        'attr': {
-                            'data-model': 'componentData[' ~ child.vars.name ~ ']'
-                        }
-                    }) }}
+                    {% if child.vars.name == '_token' %}
+                        {# CSRF token without data-model - handled by Live Component automatically #}
+                        {{ form_widget(child) }}
+                    {% else %}
+                        {# Regular form fields with data-model for live updates #}
+                        {{ form_widget(child, {
+                            'attr': {
+                                'data-model': 'componentData[' ~ child.vars.name ~ ']'
+                            }
+                        }) }}
+                    {% endif %}
                     {{ form_help(child) }}
                     {{ form_errors(child) }}
                 </div>

@@ -2,7 +2,12 @@
     "controllers": {
         "preview-stage": {
             "main": "controllers/preview_stage_controller.js",
-            "name": "preview-stage"
+            "name": "plixus--twig-component-preview-bundle--preview-stage",
+            "fetch": "eager",
+            "enabled": true,
+            "autoimport": {
+                "@plixus/twig-component-preview-bundle/styles/preview-stage.css": true
+            }
         }
     },
     "entrypoints": []

@@ -6,10 +6,10 @@ namespace Plixus\TwigComponentPreviewBundle\Attribute;
 final class PreviewableComponent
 {
     public function __construct(
-        public ?string $name = null,           // Anzeigename für Preview
-        public ?string $description = null,    // Beschreibung der Component
-        public ?string $category = null,       // Kategorisierung (z.B. "Form", "Layout")
-        public array $examples = []            // Vordefinierte Beispiel-Konfigurationen
+        public ?string $name = null,           // Display name for Preview
+        public ?string $description = null,    // Description for Component
+        public ?string $category = null,       // Category (e.g. "Form", "Layout")
+        public array $examples = []            // Predefined Example-Configuration
     ) {
     }
 }

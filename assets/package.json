@@ -1,0 +1,22 @@
+{
+    "name": "@plixus/twig-component-preview-bundle",
+    "version": "1.0.0",
+    "description": "Symfony UX bundle for live component previews",
+    "license": "MIT",
+    "keywords": ["symfony-ux"],
+    "dependencies": {
+        "@hotwired/stimulus": "^3.0.0"
+    },
+    "symfony": {
+        "controllers": {
+            "preview-stage": {
+                "main": "controllers/preview_stage_controller.js",
+                "fetch": "eager",
+                "enabled": true
+            }
+        }
+    },
+    "importmap": {
+        "@plixus/twig-component-preview-bundle": "assets/dist/bundle.js"
+    }
+}

@@ -3,7 +3,7 @@
     "description": "Symfony bundle for generating live preview interfaces for Twig Components with interactive forms and real-time updates",
     "type": "symfony-bundle",
     "license": "MIT",
-    "keywords": ["symfony", "twig", "components", "live-components", "preview", "ui", "development", "tools"],
+    "keywords": ["symfony-ux", "symfony", "twig", "components", "live-components", "preview", "ui", "development", "tools"],
     "homepage": "https://github.com/plixus/twig-component-preview-bundle",
     "support": {
         "issues": "https://github.com/plixus/twig-component-preview-bundle/issues",
@@ -24,7 +24,6 @@
         "symfony/stimulus-bundle": "^2.0",
         "symfony/asset-mapper": "^6.4|^7.0",
         "symfony/asset": "^6.4|^7.0",
-        "symfony/twig-pack": "^1.0",
         "symfony/form": "^6.4|^7.0",
         "symfony/validator": "^6.4|^7.0"
     },

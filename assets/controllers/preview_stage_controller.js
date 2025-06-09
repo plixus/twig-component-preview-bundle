@@ -54,35 +54,17 @@ export default class extends Controller {
         
         console.log('PlixusPreviewStage: Setting up auto-submit on form', form);
         
-        // Add event listeners to all form inputs
-        const inputs = form.querySelectorAll('input, select, textarea');
+        // Note: For Live Components, we don't need to submit the form manually
+        // The data-model bindings handle automatic updates
+        // This method exists for compatibility but does nothing for Live Components
         
-        inputs.forEach(input => {
-            console.log('PlixusPreviewStage: Adding listeners to', input.type, input.name || input.id);
-            
-            // Immediate submit for dropdowns, checkboxes, radio buttons
-            if (input.type === 'select-one' || input.type === 'checkbox' || input.type === 'radio' || input.tagName === 'SELECT') {
-                input.addEventListener('change', () => this.submitForm(form));
-            }
-            
-            // Debounced submit for text inputs and textareas
-            if (input.type === 'text' || input.type === 'email' || input.type === 'url' || input.tagName === 'TEXTAREA') {
-                input.addEventListener('input', this.debounce(() => this.submitForm(form), this.debounceDelayValue || 300));
-            }
-        });
-        
-        console.log('PlixusPreviewStage: Auto-submit setup complete for', inputs.length, 'inputs');
+        console.log('PlixusPreviewStage: Auto-submit setup complete (Live Component mode)');
     }
     
     submitForm(form) {
-        console.log('PlixusPreviewStage: Submitting form');
-        
-        if (form && typeof form.requestSubmit === 'function') {
-            form.requestSubmit();
-        } else if (form) {
-            // Fallback for older browsers
-            form.submit();
-        }
+        console.log('PlixusPreviewStage: Form submission not needed for Live Components');
+        // Live Components use data-model bindings for automatic updates
+        // No manual form submission required
     }
     
     debounce(func, wait) {

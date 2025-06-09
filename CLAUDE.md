@@ -1,5 +1,56 @@
 # PlixusTwigComponentPreviewBundle - Symfony Bundle
 
+## Bundle Installation Erkenntnisse (Production-Ready)
+
+### 🎯 Automatische Asset Integration gelöst
+
+**Problem gelöst:** Bundle Assets (Stimulus Controller + CSS) werden automatisch verfügbar gemacht.
+
+#### ✅ Was automatisch funktioniert:
+1. **Bundle Registration**: `bundles.php` - automatisch durch Flex
+2. **TwigComponent Integration**: Namespace wird automatisch registriert 
+3. **Stimulus Controller**: Wird automatisch in `controllers.json` hinzugefügt
+4. **CSS Auto-Import**: CSS wird mit Stimulus Controller automatisch geladen
+
+#### ⚠️ Was noch manuell hinzugefügt werden muss:
+**Asset-Mapper Pfad** in `config/packages/asset_mapper.yaml`:
+```yaml
+framework:
+    asset_mapper:
+        paths:
+            assets/: ''
+            '%kernel.project_dir%/../SymfonyBundle_TwigComponentPreviewBundle/assets': '@plixus/twig-component-preview-bundle'
+```
+
+#### 🔧 Bundle Extension Implementation:
+- `PlixusTwigComponentPreviewExtension::prepend()` konfiguriert automatisch:
+  - TwigComponent namespace
+  - Stimulus controller paths  
+  - Asset-Mapper integration (funktioniert in Extension, muss aber manuell hinzugefügt werden)
+
+#### 📝 Installation Flow:
+```bash
+composer require plixus/twig-component-preview-bundle:dev-main
+# ↓ Automatisch via Flex:
+# - Bundle → bundles.php
+# - TwigComponent namespace → twig_component.yaml
+# - Stimulus controllers → controllers.json mit CSS autoimport
+# 
+# ⚡ Einziger manueller Schritt:
+# Asset-Mapper Pfad zu asset_mapper.yaml hinzufügen
+```
+
+#### 🎯 Production-Ready Ziel:
+**Null manuelle Schritte** - Asset-Mapper Pfad soll automatisch hinzugefügt werden.
+
+### 📋 Nächste Schritte für Production:
+1. Asset-Mapper Integration über Bundle Extension verbessern
+2. Oder Symfony Flex Recipe erstellen für vollautomatische Installation
+
+---
+
+# PlixusTwigComponentPreviewBundle - Symfony Bundle
+
 ## Bundle-Überblick
 
 **Vendor:** Plixus  

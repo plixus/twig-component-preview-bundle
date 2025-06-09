@@ -1,0 +1,15 @@
+# Configuration for Plixus TwigComponentPreviewBundle
+# This file is automatically created during bundle installation
+
+framework:
+    asset_mapper:
+        paths:
+            # Bundle assets path (works for both dev and prod installation)
+            '%kernel.project_dir%/vendor/plixus/twig-component-preview-bundle/assets': '@plixus/twig-component-preview-bundle'
+
+twig_component:
+    defaults:
+        # Bundle TwigComponent namespace registration
+        Plixus\TwigComponentPreviewBundle\TwigComponent\:
+            template_directory: '@PlixusTwigComponentPreview/components/'
+            name_prefix: 'Plixus'

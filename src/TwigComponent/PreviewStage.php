@@ -5,6 +5,7 @@ namespace Plixus\TwigComponentPreviewBundle\TwigComponent;
 use Plixus\TwigComponentPreviewBundle\Service\ComponentInstanceFactory;
 use Plixus\TwigComponentPreviewBundle\Service\ComponentPreviewAnalyzer;
 use Plixus\TwigComponentPreviewBundle\Service\PreviewFormBuilder;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -97,7 +98,9 @@ final class PreviewStage
     #[ExposeInTemplate]
     public function getForm()
     {
-        $formBuilder = $this->formFactory->createBuilder();
+        $formBuilder = $this->formFactory->createBuilder(FormType::class, null, [
+            // CSRF protection is enabled by default - Live Components handle this automatically
+        ]);
         $this->formBuilder->buildPreviewForm($formBuilder, $this->componentClass);
         
         return $formBuilder->getForm()->createView();
