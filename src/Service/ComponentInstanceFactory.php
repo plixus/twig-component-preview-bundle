@@ -10,7 +10,7 @@ final class ComponentInstanceFactory
     }
 
     /**
-     * Erstellt eine Component-Instance mit Default-Werten aus PreviewProperty
+     * Creates a component instance with default values from PreviewProperty
      */
     public function createWithDefaults(string $componentClassName): object
     {
@@ -31,7 +31,7 @@ final class ComponentInstanceFactory
     }
 
     /**
-     * Erstellt eine Component-Instance aus Form-Daten
+     * Creates a component instance from form data
      */
     public function createFromFormData(string $componentClassName, array $formData): object
     {
@@ -49,7 +49,7 @@ final class ComponentInstanceFactory
     }
 
     /**
-     * Updated bestehende Component-Instance mit neuen Daten
+     * Updates existing component instance with new data
      */
     public function updateFromFormData(object $component, array $formData): object
     {
@@ -61,7 +61,7 @@ final class ComponentInstanceFactory
     }
 
     /**
-     * Extrahiert aktuelle Property-Werte als Array
+     * Extracts current property values as an array
      */
     public function extractPropertyValues(object $component): array
     {
@@ -77,7 +77,7 @@ final class ComponentInstanceFactory
     }
 
     /**
-     * Alias für extractPropertyValues - für Template-Verwendung
+     * Alias for extractPropertyValues - for template usage
      */
     public function extractPropsFromInstance(object $component): array
     {
@@ -85,7 +85,7 @@ final class ComponentInstanceFactory
     }
 
     /**
-     * Holt Default-Werte für eine Component-Klasse
+     * Gets default values for a component class
      */
     public function getDefaultValuesForClass(string $componentClassName): array
     {
@@ -102,38 +102,38 @@ final class ComponentInstanceFactory
     }
 
     /**
-     * Setzt einen Property-Wert auf eine Component-Instance
+     * Sets a property value on a component instance
      */
     private function setPropertyValue(object $instance, string $propertyName, mixed $value): void
     {
         $reflection = new \ReflectionClass($instance);
-        
+
         if (!$reflection->hasProperty($propertyName)) {
             return;
         }
 
         $property = $reflection->getProperty($propertyName);
         $property->setAccessible(true);
-        
+
         // Handle type-specific conversions
         $value = $this->convertValueForProperty($property, $value);
-        
+
         $property->setValue($instance, $value);
     }
 
     /**
-     * Konvertiert Werte entsprechend dem Property-Typ
+     * Converts values according to the property type
      */
     private function convertValueForProperty(\ReflectionProperty $property, mixed $value): mixed
     {
         $type = $property->getType();
-        
+
         if (!$type instanceof \ReflectionNamedType) {
             return $value;
         }
-        
+
         $typeName = $type->getName();
-        
+
         // Handle boolean properties (checkboxes)
         if ($typeName === 'bool') {
             // HTML checkboxes send null/empty when unchecked
@@ -142,36 +142,36 @@ final class ComponentInstanceFactory
             }
             return (bool) $value;
         }
-        
+
         // Handle nullable string properties  
         if ($typeName === 'string' && $type->allowsNull() && $value === '') {
             return null;
         }
-        
+
         return $value;
     }
-    
+
     /**
-     * Prüft ob eine Property nullable string ist
+     * Checks if a property is a nullable string
      */
     private function isNullableStringProperty(\ReflectionProperty $property): bool
     {
         $type = $property->getType();
-        
+
         if (!$type instanceof \ReflectionNamedType) {
             return false;
         }
-        
+
         return $type->getName() === 'string' && $type->allowsNull();
     }
 
     /**
-     * Holt einen Property-Wert von einer Component-Instance
+     * Gets a property value from a component instance
      */
     private function getPropertyValue(object $instance, string $propertyName): mixed
     {
         $reflection = new \ReflectionClass($instance);
-        
+
         if (!$reflection->hasProperty($propertyName)) {
             return null;
         }

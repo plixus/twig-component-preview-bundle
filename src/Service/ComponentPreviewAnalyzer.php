@@ -8,7 +8,7 @@ use Plixus\TwigComponentPreviewBundle\Attribute\PreviewProperty;
 final class ComponentPreviewAnalyzer
 {
     /**
-     * Prüft ob Klasse als PreviewableComponent markiert ist
+     * Checks if class is marked as PreviewableComponent
      */
     public function isPreviewable(string $className): bool
     {
@@ -23,7 +23,7 @@ final class ComponentPreviewAnalyzer
     }
 
     /**
-     * Analysiert alle PreviewProperty Attribute einer Component-Klasse
+     * Analyzes all PreviewProperty attributes of a component class
      */
     public function analyzePreviewProperties(string $className): array
     {
@@ -36,7 +36,7 @@ final class ComponentPreviewAnalyzer
 
         foreach ($reflection->getProperties() as $property) {
             $attributes = $property->getAttributes(PreviewProperty::class);
-            
+
             if (count($attributes) > 0) {
                 $attribute = $attributes[0]->newInstance();
                 $properties[$property->getName()] = $attribute;
@@ -47,7 +47,7 @@ final class ComponentPreviewAnalyzer
     }
 
     /**
-     * Holt PreviewableComponent Metadaten
+     * Gets PreviewableComponent metadata
      */
     public function getComponentMetadata(string $className): ?PreviewableComponent
     {
@@ -66,18 +66,18 @@ final class ComponentPreviewAnalyzer
     }
 
     /**
-     * Findet alle PreviewableComponent Klassen in einem Namespace
+     * Finds all PreviewableComponent classes in a namespace
      */
     public function discoverPreviewableComponents(string $namespace): array
     {
-        // Hier würde eine komplexere Implementierung kommen, die
-        // tatsächlich alle Klassen in einem Namespace durchsucht
-        // Für jetzt returnieren wir ein leeres Array
+        // Here would be a more complex implementation that
+        // actually searches all classes in a namespace
+        // For now we return an empty array
         return [];
     }
 
     /**
-     * Validiert Component-Instance gegen PreviewProperty Constraints
+     * Validates component instance against PreviewProperty constraints
      */
     public function validateComponentInstance(object $component): array
     {

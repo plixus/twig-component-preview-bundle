@@ -20,7 +20,7 @@ Das Bundle ist funktional und architektural solide, benötigt aber kritische Ver
 ## 🚨 **Phase 1: Kritische Grundlagen** *(URGENT - 2-3 Tage)*
 
 ### 1.1 Internationalisierung & Code-Qualität *(4-6 Stunden)*
-- [ ] **Deutsche Kommentare entfernen**
+- [x] **Deutsche Kommentare entfernen**
   - `src/Service/ComponentInstanceFactory.php` - Line comments "// Erstelle eine Instanz..."
   - `src/Service/ComponentPreviewAnalyzer.php` - Method comments "// Hole alle Properties..."
 - [ ] **Hardcoded Strings durch Translation Keys ersetzen**
