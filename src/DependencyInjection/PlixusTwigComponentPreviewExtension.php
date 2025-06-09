@@ -28,6 +28,7 @@ final class PlixusTwigComponentPreviewExtension extends Extension implements Pre
                 'defaults' => [
                     'Plixus\\TwigComponentPreviewBundle\\TwigComponent\\' => [
                         'template_directory' => '@PlixusTwigComponentPreview/components/',
+                        'name_prefix' => 'Plixus'
                     ],
                 ],
             ]);
