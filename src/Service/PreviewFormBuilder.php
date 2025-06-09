@@ -10,15 +10,30 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+/**
+ * Service for building forms for component previews.
+ *
+ * This service creates Symfony forms based on PreviewProperty attributes
+ * defined on component classes, allowing for dynamic form generation.
+ */
 final class PreviewFormBuilder
 {
+    /**
+     * Constructor.
+     *
+     * @param ComponentPreviewAnalyzer $analyzer The component preview analyzer service
+     */
     public function __construct(
         private ComponentPreviewAnalyzer $analyzer
     ) {
     }
 
     /**
-     * Baut Formular für Component basierend auf PreviewProperty Attributen
+     * Builds a form for a component based on PreviewProperty attributes.
+     *
+     * @param FormBuilderInterface $builder The form builder to add fields to
+     * @param string $componentClassName The fully qualified class name of the component
+     * @return void
      */
     public function buildPreviewForm(FormBuilderInterface $builder, string $componentClassName): void
     {
@@ -34,7 +49,10 @@ final class PreviewFormBuilder
     }
 
     /**
-     * Konvertiert PreviewProperty type zu Symfony Form Type
+     * Converts PreviewProperty type to Symfony Form Type.
+     *
+     * @param string $type The PreviewProperty type
+     * @return string The corresponding Symfony Form Type class
      */
     private function resolveFormType(string $type): string
     {
@@ -49,7 +67,10 @@ final class PreviewFormBuilder
     }
 
     /**
-     * Baut Form-Optionen aus PreviewProperty
+     * Builds form options from a PreviewProperty.
+     *
+     * @param PreviewProperty $property The PreviewProperty to build options from
+     * @return array<string, mixed> The form options
      */
     private function buildFormOptions(PreviewProperty $property): array
     {
@@ -87,7 +108,10 @@ final class PreviewFormBuilder
     }
 
     /**
-     * Gruppiert Form-Fields nach PreviewProperty->group
+     * Groups form fields by PreviewProperty->group.
+     *
+     * @param string $componentClassName The fully qualified class name of the component
+     * @return array<string, array<string>> An associative array of group names to arrays of property names
      */
     public function getPropertyGroups(string $componentClassName): array
     {
@@ -96,7 +120,7 @@ final class PreviewFormBuilder
 
         foreach ($properties as $propertyName => $previewProperty) {
             $groupName = $previewProperty->group ?? 'default';
-            
+
             if (!isset($groups[$groupName])) {
                 $groups[$groupName] = [];
             }

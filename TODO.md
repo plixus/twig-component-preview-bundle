@@ -26,7 +26,7 @@ Das Bundle ist funktional und architektural solide, benötigt aber kritische Ver
 - [x] **Hardcoded Strings durch Translation Keys ersetzen**
   - Template-Strings in `templates/components/PlixusPreviewStage.html.twig`
   - Error-Messages in Service-Klassen
-- [ ] **PSR-5 Docblocks hinzufügen**
+- [x] **PSR-5 Docblocks hinzufügen**
   - Alle public/protected Methods dokumentieren
   - Parameter- und Return-Type-Beschreibungen
   - `@throws` Annotations für Exceptions

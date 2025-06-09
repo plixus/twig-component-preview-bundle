@@ -6,14 +6,30 @@ use Plixus\TwigComponentPreviewBundle\Attribute\PreviewableComponent;
 use Plixus\TwigComponentPreviewBundle\Attribute\PreviewProperty;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * Analyzes component classes for preview-related attributes and metadata.
+ *
+ * This service provides functionality to inspect component classes for
+ * PreviewableComponent and PreviewProperty attributes, extract metadata,
+ * and validate component instances against constraints.
+ */
 final class ComponentPreviewAnalyzer
 {
+    /**
+     * Constructor.
+     *
+     * @param TranslatorInterface $translator The translator service for error messages
+     */
     public function __construct(
         private TranslatorInterface $translator
     ) {
     }
+
     /**
-     * Checks if class is marked as PreviewableComponent
+     * Checks if a class is marked as PreviewableComponent.
+     *
+     * @param string $className The fully qualified class name to check
+     * @return bool True if the class has the PreviewableComponent attribute, false otherwise
      */
     public function isPreviewable(string $className): bool
     {
@@ -28,7 +44,10 @@ final class ComponentPreviewAnalyzer
     }
 
     /**
-     * Analyzes all PreviewProperty attributes of a component class
+     * Analyzes all PreviewProperty attributes of a component class.
+     *
+     * @param string $className The fully qualified class name to analyze
+     * @return array<string, PreviewProperty> An associative array of property names to PreviewProperty instances
      */
     public function analyzePreviewProperties(string $className): array
     {
@@ -52,7 +71,10 @@ final class ComponentPreviewAnalyzer
     }
 
     /**
-     * Gets PreviewableComponent metadata
+     * Gets PreviewableComponent metadata for a class.
+     *
+     * @param string $className The fully qualified class name to get metadata for
+     * @return PreviewableComponent|null The PreviewableComponent instance or null if not found
      */
     public function getComponentMetadata(string $className): ?PreviewableComponent
     {
@@ -71,7 +93,10 @@ final class ComponentPreviewAnalyzer
     }
 
     /**
-     * Finds all PreviewableComponent classes in a namespace
+     * Finds all PreviewableComponent classes in a namespace.
+     *
+     * @param string $namespace The namespace to search in
+     * @return array<string> An array of fully qualified class names that have the PreviewableComponent attribute
      */
     public function discoverPreviewableComponents(string $namespace): array
     {
@@ -82,7 +107,12 @@ final class ComponentPreviewAnalyzer
     }
 
     /**
-     * Validates component instance against PreviewProperty constraints
+     * Validates component instance against PreviewProperty constraints.
+     *
+     * Checks if all required properties have values.
+     *
+     * @param object $component The component instance to validate
+     * @return array<string, string> An associative array of property names to error messages, empty if no errors
      */
     public function validateComponentInstance(object $component): array
     {

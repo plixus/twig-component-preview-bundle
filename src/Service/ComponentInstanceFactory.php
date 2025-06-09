@@ -2,10 +2,23 @@
 
 namespace Plixus\TwigComponentPreviewBundle\Service;
 
+use ReflectionProperty;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * Factory service for creating and manipulating component instances.
+ *
+ * This service provides functionality to create component instances with default values,
+ * create instances from form data, update existing instances, and extract property values.
+ */
 final class ComponentInstanceFactory
 {
+    /**
+     * Constructor.
+     *
+     * @param ComponentPreviewAnalyzer $analyzer The component preview analyzer service
+     * @param TranslatorInterface $translator The translator service for error messages
+     */
     public function __construct(
         private ComponentPreviewAnalyzer $analyzer,
         private TranslatorInterface $translator
@@ -13,7 +26,11 @@ final class ComponentInstanceFactory
     }
 
     /**
-     * Creates a component instance with default values from PreviewProperty
+     * Creates a component instance with default values from PreviewProperty attributes.
+     *
+     * @param string $componentClassName The fully qualified class name of the component to create
+     * @return object The created component instance with default values set
+     * @throws \InvalidArgumentException If the component class does not exist
      */
     public function createWithDefaults(string $componentClassName): object
     {
@@ -36,7 +53,12 @@ final class ComponentInstanceFactory
     }
 
     /**
-     * Creates a component instance from form data
+     * Creates a component instance from form data.
+     *
+     * @param string $componentClassName The fully qualified class name of the component to create
+     * @param array<string, mixed> $formData An associative array of property names to values
+     * @return object The created component instance with form data values set
+     * @throws \InvalidArgumentException If the component class does not exist
      */
     public function createFromFormData(string $componentClassName, array $formData): object
     {
@@ -56,7 +78,11 @@ final class ComponentInstanceFactory
     }
 
     /**
-     * Updates existing component instance with new data
+     * Updates an existing component instance with new data.
+     *
+     * @param object $component The component instance to update
+     * @param array<string, mixed> $formData An associative array of property names to values
+     * @return object The updated component instance
      */
     public function updateFromFormData(object $component, array $formData): object
     {
@@ -68,7 +94,10 @@ final class ComponentInstanceFactory
     }
 
     /**
-     * Extracts current property values as an array
+     * Extracts current property values as an array.
+     *
+     * @param object $component The component instance to extract values from
+     * @return array<string, mixed> An associative array of property names to values
      */
     public function extractPropertyValues(object $component): array
     {
@@ -84,7 +113,10 @@ final class ComponentInstanceFactory
     }
 
     /**
-     * Alias for extractPropertyValues - for template usage
+     * Alias for extractPropertyValues - for template usage.
+     *
+     * @param object $component The component instance to extract values from
+     * @return array<string, mixed> An associative array of property names to values
      */
     public function extractPropsFromInstance(object $component): array
     {
@@ -92,7 +124,10 @@ final class ComponentInstanceFactory
     }
 
     /**
-     * Gets default values for a component class
+     * Gets default values for a component class.
+     *
+     * @param string $componentClassName The fully qualified class name of the component
+     * @return array<string, mixed> An associative array of property names to default values
      */
     public function getDefaultValuesForClass(string $componentClassName): array
     {
@@ -109,7 +144,12 @@ final class ComponentInstanceFactory
     }
 
     /**
-     * Sets a property value on a component instance
+     * Sets a property value on a component instance.
+     *
+     * @param object $instance The component instance to set the property on
+     * @param string $propertyName The name of the property to set
+     * @param mixed $value The value to set
+     * @return void
      */
     private function setPropertyValue(object $instance, string $propertyName, mixed $value): void
     {
@@ -129,9 +169,13 @@ final class ComponentInstanceFactory
     }
 
     /**
-     * Converts values according to the property type
+     * Converts values according to the property type.
+     *
+     * @param ReflectionProperty $property The reflection property to get type information from
+     * @param mixed $value The value to convert
+     * @return mixed The converted value
      */
-    private function convertValueForProperty(\ReflectionProperty $property, mixed $value): mixed
+    private function convertValueForProperty(ReflectionProperty $property, mixed $value): mixed
     {
         $type = $property->getType();
 
@@ -159,9 +203,12 @@ final class ComponentInstanceFactory
     }
 
     /**
-     * Checks if a property is a nullable string
+     * Checks if a property is a nullable string.
+     *
+     * @param ReflectionProperty $property The reflection property to check
+     * @return bool True if the property is a nullable string, false otherwise
      */
-    private function isNullableStringProperty(\ReflectionProperty $property): bool
+    private function isNullableStringProperty(ReflectionProperty $property): bool
     {
         $type = $property->getType();
 
@@ -173,7 +220,11 @@ final class ComponentInstanceFactory
     }
 
     /**
-     * Gets a property value from a component instance
+     * Gets a property value from a component instance.
+     *
+     * @param object $instance The component instance to get the property value from
+     * @param string $propertyName The name of the property to get
+     * @return mixed The value of the property
      */
     private function getPropertyValue(object $instance, string $propertyName): mixed
     {
